@@ -2,10 +2,14 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Brain, BarChart3, Globe, Zap, ArrowRight, Play } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Brain, BarChart3, Globe, Zap, ArrowRight, Play, X } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 import heroImage from "@/assets/hero-ocean.jpg";
 
 const Index = () => {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
   const features = [
     {
       icon: Brain,
@@ -57,13 +61,61 @@ const Index = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-                <Button variant="surface" size="lg" className="group">
-                  Try Interactive Demo
-                  <Play className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
-                <Button variant="outline" size="lg" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
-                  Watch Video Tour
-                </Button>
+                <Link to="/demo">
+                  <Button variant="surface" size="lg" className="group">
+                    Try Interactive Demo
+                    <Play className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+                
+                <Dialog open={isVideoOpen} onOpenChange={setIsVideoOpen}>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" size="lg" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
+                      Watch Video Tour
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl w-full p-0">
+                    <DialogHeader className="p-6 pb-0">
+                      <DialogTitle className="text-xl font-semibold">FloatChat Platform Tour</DialogTitle>
+                    </DialogHeader>
+                    <div className="p-6 pt-0">
+                      <div className="relative w-full aspect-video bg-muted rounded-lg overflow-hidden">
+                        {/* Placeholder for video */}
+                        <div className="absolute inset-0 flex items-center justify-center bg-gradient-ocean">
+                          <div className="text-center text-primary-foreground">
+                            <Play className="h-16 w-16 mx-auto mb-4 opacity-80" />
+                            <h3 className="text-xl font-semibold mb-2">Video Tour Coming Soon</h3>
+                            <p className="opacity-80">
+                              Experience FloatChat's powerful features through our guided walkthrough
+                            </p>
+                          </div>
+                        </div>
+                        {/* Real video embed would go here */}
+                        {/* <iframe 
+                          width="100%" 
+                          height="100%" 
+                          src="https://www.youtube.com/embed/YOUR_VIDEO_ID" 
+                          title="FloatChat Demo" 
+                          frameBorder="0" 
+                          allowFullScreen
+                        ></iframe> */}
+                      </div>
+                      <div className="mt-4 text-center">
+                        <p className="text-muted-foreground text-sm mb-4">
+                          See how researchers are transforming ocean data analysis with FloatChat
+                        </p>
+                        <Link to="/demo">
+                          <Button variant="ocean" className="mr-2">
+                            Try Live Demo
+                          </Button>
+                        </Link>
+                        <Button variant="outline" onClick={() => setIsVideoOpen(false)}>
+                          Close
+                        </Button>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </div>
 
               <div className="text-sm opacity-75">
@@ -186,13 +238,17 @@ const Index = () => {
               AI-powered ocean data platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="surface" size="lg" className="group">
-                Try Demo Now
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button variant="outline" size="lg" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
-                Request Early Access
-              </Button>
+              <Link to="/demo">
+                <Button variant="surface" size="lg" className="group">
+                  Try Demo Now
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button variant="outline" size="lg" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
+                  Request Early Access
+                </Button>
+              </Link>
             </div>
           </div>
         </section>

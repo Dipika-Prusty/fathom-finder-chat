@@ -54,9 +54,11 @@ const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button variant="ocean" size="sm">
-              Try Demo
-            </Button>
+            <Link to="/demo">
+              <Button variant="ocean" size="sm">
+                Try Demo
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -92,9 +94,11 @@ const Navbar = () => {
               </Link>
             ))}
             <div className="pt-2">
-              <Button variant="ocean" className="w-full">
-                Try Demo
-              </Button>
+              <Link to="/demo" className="block">
+                <Button variant="ocean" className="w-full">
+                  Try Demo
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
